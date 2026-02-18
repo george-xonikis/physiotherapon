@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import HeroSection from "@/components/HeroSection";
@@ -8,8 +10,11 @@ import ContactInfo from "@/components/ContactInfo";
 import ContactForm from "@/components/ContactForm";
 import SocialLinks from "@/components/SocialLinks";
 import { machines } from "@/data/machines";
+import { useI18n } from "@/i18n/I18nContext";
 
 export default function HomePage() {
+  const { locale, t } = useI18n();
+
   return (
     <main>
       <HeroSection variant="home" />
@@ -19,89 +24,86 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Why Choose */}
-            <div className="p-8 bg-gray-main rounded text-white flex flex-col">
+            <div className="p-8 bg-gray-main rounded flex flex-col">
               <h3 className="font-bold text-[34px] font-heading mb-6">
-                Γιατί να επιλέξετε το Physiotherapon;
+                {t("whyUs.title")}
               </h3>
-              <p className="mb-4">
-                Στην <strong>καρδιά της Θεσσαλονίκης</strong>, το
-                Physiotherapon αποτελεί μία πρωτοποριακή επιλογή στον τομέα
-                της φυσικοθεραπείας και κινησιοθεραπείας.
-              </p>
-              <ul className="list-disc list-inside space-y-2 text-white/90 text-sm">
-                <li>Πλήρως εξοπλισμένες αίθουσες</li>
-                <li>Σύγχρονα μηχανήματα τελευταίας τεχνολογίας</li>
-                <li>Ολιστική προσέγγιση στην αποκατάσταση</li>
+              <p
+                className="mb-4"
+                dangerouslySetInnerHTML={{ __html: t("whyUs.description.html") }}
+              />
+              <ul className="list-disc list-inside space-y-2 opacity-90 text-sm">
+                <li>{t("whyUs.feature1")}</li>
+                <li>{t("whyUs.feature2")}</li>
+                <li>{t("whyUs.feature3")}</li>
               </ul>
             </div>
 
             {/* Doctor 1 */}
-            <div className="text-center rounded-xl bg-white shadow-[0px_2px_15px_rgba(0,0,0,0.1)] p-8 flex flex-col">
+            <div className="text-center rounded-xl bg-white shadow-[0px_2px_15px_rgba(0,0,0,0.1)] p-8 flex flex-col text-foreground-inverse">
               <Image
                 src="/images/doctors/terzanidis.png"
-                alt="ΣΤΑΥΡΟΣ ΤΕΡΖΑΝΙΔΗΣ"
+                alt={`${t("whyUs.doctor1.firstName")} ${t("whyUs.doctor1.lastName")}`}
                 width={87}
                 height={87}
                 className="mx-auto my-4 aspect-square object-cover"
               />
               <h4 className="text-xl font-bold mb-4 font-heading">
-                ΣΤΑΥΡΟΣ <br /> ΤΕΡΖΑΝΙΔΗΣ
+                {t("whyUs.doctor1.firstName")} <br /> {t("whyUs.doctor1.lastName")}
               </h4>
               <div className="text-[15px] text-start flex-1">
                 <p className="mb-2">
-                  Φυσικοθεραπευτής, πτυχιούχος ανώτατης εκπαίδευσης
-                  φυσικοθεραπείας.
+                  {t("whyUs.doctor1.desc")}
                 </p>
-                <p className="mb-2 font-semibold">Εξειδίκευση:</p>
+                <p className="mb-2 font-semibold">{t("whyUs.doctor1.specLabel")}</p>
                 <ul className="list-disc list-inside space-y-1 text-sm">
-                  <li>Αθλητική αποκατάσταση</li>
-                  <li>Νέες τεχνολογίες φυσικοθεραπείας</li>
-                  <li>Κινησιοθεραπεία</li>
+                  <li>{t("whyUs.doctor1.spec1")}</li>
+                  <li>{t("whyUs.doctor1.spec2")}</li>
+                  <li>{t("whyUs.doctor1.spec3")}</li>
                 </ul>
                 <p className="mt-2 text-sm text-gray-500">
-                  20 χρόνια εμπειρίας — ΠΑΕ ΠΑΟΚ
+                  {t("whyUs.doctor1.experience")}
                 </p>
               </div>
               <Link
                 href="/doctors/terzanidis"
                 className="inline-block mt-4 px-4 py-2 bg-black text-white rounded-full transition-colors duration-300 hover:bg-oil"
               >
-                Περισσότερα
+                {t("common.more")}
               </Link>
             </div>
 
             {/* Doctor 2 */}
-            <div className="text-center rounded-xl bg-white shadow-[0px_2px_15px_rgba(0,0,0,0.1)] p-8 flex flex-col">
+            <div className="text-center rounded-xl bg-white shadow-[0px_2px_15px_rgba(0,0,0,0.1)] p-8 flex flex-col text-foreground-inverse">
               <Image
                 src="/images/doctors/papatheodorou.png"
-                alt="ΕΥΑΓΓΕΛΟΣ ΠΑΠΑΘΕΟΔΩΡΟΥ"
+                alt={`${t("whyUs.doctor2.firstName")} ${t("whyUs.doctor2.lastName")}`}
                 width={87}
                 height={87}
                 className="mx-auto my-4 aspect-square object-cover"
               />
               <h4 className="text-xl font-bold mb-4 font-heading">
-                ΕΥΑΓΓΕΛΟΣ <br /> ΠΑΠΑΘΕΟΔΩΡΟΥ
+                {t("whyUs.doctor2.firstName")} <br /> {t("whyUs.doctor2.lastName")}
               </h4>
               <div className="text-[15px] text-start flex-1">
                 <p className="mb-2">
-                  Υψηλά καταρτισμένος β.Φυσικοθεραπευτής με δεκαπενταετή
-                  εμπειρία.
+                  {t("whyUs.doctor2.desc")}
                 </p>
-                <p className="mb-2 font-semibold">Εμπειρία σε:</p>
+                <p className="mb-2 font-semibold">{t("whyUs.doctor2.expLabel")}</p>
                 <ul className="list-disc list-inside space-y-1 text-sm">
-                  <li>424 Γ.Σ.Ν. Θεσσαλονίκης</li>
-                  <li>Κ.ΑΠ.Η, Ορθοπεδικά Ιατρεία</li>
-                  <li>Εργαστήρια Φυσικοθεραπείας</li>
+                  <li>{t("whyUs.doctor2.exp1")}</li>
+                  <li>{t("whyUs.doctor2.exp2")}</li>
+                  <li>{t("whyUs.doctor2.exp3")}</li>
                 </ul>
                 <p className="mt-2 text-sm text-gray-500">
-                  Όλες οι ηλικιακές ομάδες, αθλητές &amp; ΑΜΕΑ
+                  {t("whyUs.doctor2.allAges")}
                 </p>
               </div>
               <Link
                 href="/doctors/papatheodorou"
                 className="inline-block mt-4 px-4 py-2 bg-black text-white rounded-full transition-colors duration-300 hover:bg-oil"
               >
-                Περισσότερα
+                {t("common.more")}
               </Link>
             </div>
           </div>
@@ -115,25 +117,24 @@ export default function HomePage() {
             <div className="lg:col-span-5 relative min-h-[500px]">
               <Image
                 src="/images/about.webp"
-                alt="Physiotherapon χώρος"
+                alt="Physiotherapon"
                 fill
                 className="object-cover object-center"
                 sizes="(max-width: 1024px) 100vw, 42vw"
               />
             </div>
             <div className="lg:col-span-7 flex flex-col items-stretch justify-center py-10 px-6 lg:px-12">
-              <h3 className="text-white font-bold font-heading text-[28px] mb-4">
-                Σχετικά με το Physiotherapon
+              <h3 className="font-bold font-heading text-[28px] mb-4">
+                {t("about.title")}
               </h3>
-              <p className="text-white mb-2">
-                Η ιστορία μας ξεκίνησε το <strong>καλοκαίρι του 2023</strong>,
-                όταν ο <strong>Σταύρος Τερζανίδης</strong> (Φυσικοθεραπευτής)
-                και ο <strong>Βαγγέλης Παπαθεοδώρου</strong> (β.
-                Φυσικοθεραπευτής) αποφάσισαν να ενώσουν δυνάμεις.
-              </p>
-              <p className="text-white/80 text-xl italic mb-4">
-                physiotherapy + θεράπων = <strong className="text-white">Physiotherapon</strong>
-              </p>
+              <p
+                className="mb-2"
+                dangerouslySetInnerHTML={{ __html: t("about.history.html") }}
+              />
+              <p
+                className="text-white/80 text-xl italic mb-4"
+                dangerouslySetInnerHTML={{ __html: t("about.etymology.html") }}
+              />
 
               <div className="mt-8 flex items-start p-4">
                 <div className="flex items-center justify-center w-16 h-16 rounded-full shrink-0">
@@ -144,12 +145,10 @@ export default function HomePage() {
                     height={64}
                   />
                 </div>
-                <div className="text-white text-[15px] ml-4">
-                  <p className="font-semibold mb-1">Ο χώρος μας</p>
-                  <p className="text-white/80">
-                    Νέο φυσικοθεραπευτήριο στη Θεσσαλονίκη με πλήρως
-                    εξοπλισμένες αίθουσες, σύγχρονα μηχανήματα και εργαλεία
-                    αποκατάστασης &amp; κινησιοθεραπείας.
+                <div className="text-[15px] ml-4">
+                  <p className="font-semibold mb-1">{t("about.ourSpace")}</p>
+                  <p className="opacity-80">
+                    {t("about.ourSpaceDesc")}
                   </p>
                 </div>
               </div>
@@ -163,13 +162,13 @@ export default function HomePage() {
                     height={64}
                   />
                 </div>
-                <div className="text-white text-[15px] ml-4">
-                  <p className="font-semibold mb-1">Τι προσφέρουμε</p>
-                  <ul className="list-disc list-inside space-y-0.5 text-white/80">
-                    <li>Φυσικοθεραπεία για αθλητές</li>
-                    <li>Αποκατάσταση τραυματισμών</li>
-                    <li>Φυσικοθεραπεία αναπηριών</li>
-                    <li>Κινησιοθεραπεία</li>
+                <div className="text-[15px] ml-4">
+                  <p className="font-semibold mb-1">{t("about.whatWeOffer")}</p>
+                  <ul className="list-disc list-inside space-y-0.5 opacity-80">
+                    <li>{t("about.offer1")}</li>
+                    <li>{t("about.offer2")}</li>
+                    <li>{t("about.offer3")}</li>
+                    <li>{t("about.offer4")}</li>
                   </ul>
                 </div>
               </div>
@@ -183,9 +182,12 @@ export default function HomePage() {
                     height={64}
                   />
                 </div>
-                <div className="text-white text-[15px] ml-4">
-                  <p className="font-semibold mb-1">Το όραμά μας</p>
-                  <p className="text-white/80">Φυσικοθεραπεία για <strong className="text-white">όλους</strong>!</p>
+                <div className="text-[15px] ml-4">
+                  <p className="font-semibold mb-1">{t("about.ourVision")}</p>
+                  <p
+                    className="opacity-80"
+                    dangerouslySetInnerHTML={{ __html: t("about.visionText.html") }}
+                  />
                 </div>
               </div>
             </div>
@@ -198,14 +200,11 @@ export default function HomePage() {
         id="quote"
         className="py-15 overflow-hidden flex justify-center items-center flex-col min-h-[200px] text-center"
       >
-        <h3 className="w-[80%] mx-auto text-white text-lg font-normal leading-6 font-heading">
-          Ελάτε να δυναμώσουμε το σώμα σας, χαράσσοντας το ιδανικό για τις
-          ανάγκες σας πλάνο θεραπείας και αποκατάστασης, μέσα από τις σύγχρονες
-          τεχνολογίες φυσικοθεραπείας αλλά και τις τελευταίες τεχνικές
-          κινησιοθεραπείας!
+        <h3 className="w-[80%] mx-auto text-lg font-normal leading-6 font-heading">
+          {t("quote.text")}
         </h3>
-        <p className="w-[80%] mx-auto text-white mt-4">
-          Σ.Τερζανίδης - Β. Παπαθεοδώρου
+        <p className="w-[80%] mx-auto mt-4">
+          {t("quote.attribution")}
         </p>
       </section>
 
@@ -223,47 +222,39 @@ export default function HomePage() {
         />
         <div className="absolute inset-0 bg-[rgba(8,33,33,0.5)]" />
         <div className="container mx-auto px-4 relative z-10">
-          <SectionTitle title="Θεραπείες">
+          <SectionTitle title={t("therapies.title")}>
             <p>
-              Η κακή στάση του σώματος, η καθιστική ζωή, ο πρωταθλητισμός, η
-              παράλυση, ένα ατύχημα, μία ασθένεια εκ γενετής, ο πόνος εν
-              γένει — πολλοί είναι οι λόγοι που μπορεί να σας οδηγήσουν στην
-              πόρτα του φυσικοθεραπευτή.
+              {t("therapies.intro")}
             </p>
           </SectionTitle>
 
           <div className="w-[85%] mx-auto my-4 bg-green-main p-4 text-start rounded-[5px]">
-            <p className="text-white text-base font-medium leading-6">
-              Πιστεύουμε πως η λήψη <b>καλού ιστορικού</b>, σε συνδυασμό με
-              τις <b>πρόσφατες εξετάσεις</b> σας και σε{" "}
-              <b>συνεργασία με τον ορθοπεδικό σας</b>, είναι απαραίτητα βήματα
-              για το καλύτερο πλάνο αποθεραπείας και αποκατάστασης.
-            </p>
+            <p
+              className="text-base font-medium leading-6"
+              dangerouslySetInnerHTML={{ __html: t("therapies.box1.html") }}
+            />
           </div>
 
           <div className="w-[85%] mx-auto my-4 bg-green-main p-4 text-start rounded-[5px]">
-            <p className="text-white text-base font-medium leading-6">
-              Στο <b>Physiotherapon</b>, με εμπειρία σε απαιτητικά πεδία
-              φυσικοθεραπείας — όπως νοσοκομεία και αθλητικές
-              ομάδες — στοχεύουμε μαζί σας σε μία καθημερινότητα{" "}
-              <b>λειτουργική, αυτόνομη και χωρίς πόνο</b>.
-            </p>
+            <p
+              className="text-base font-medium leading-6"
+              dangerouslySetInnerHTML={{ __html: t("therapies.box2.html") }}
+            />
           </div>
 
           <div className="w-[85%] mx-auto my-4 bg-green-main p-4 text-start rounded-[5px]">
             <p className="text-white text-base font-medium leading-6 mb-3">
-              Επικοινωνήστε μαζί μας μεταξύ άλλων για:
+              {t("therapies.box3Intro")}
             </p>
-            <ul className="text-white text-base font-medium leading-7 list-disc list-inside space-y-1">
-              <li>Αποκατάσταση μηνίσκου</li>
-              <li>Αποκατάσταση πρόσθιου και οπίσθιου χιαστού συνδέσμου</li>
-              <li>Αποκατάσταση αρθροπλαστικής γόνατος και ισχίου</li>
-              <li>Αποκατάσταση τραυματισμών ώμου, μέσης, αυχένα</li>
-              <li>Βελτιστοποίηση εύρους κίνησης αρθρώσεων</li>
+            <ul className="text-base font-medium leading-7 list-disc list-inside space-y-1">
+              <li>{t("therapies.item1")}</li>
+              <li>{t("therapies.item2")}</li>
+              <li>{t("therapies.item3")}</li>
+              <li>{t("therapies.item4")}</li>
+              <li>{t("therapies.item5")}</li>
             </ul>
             <p className="text-white text-base font-medium leading-6 mt-3">
-              ...και για οποιαδήποτε άλλη ανάγκη φυσικοθεραπείας και
-              κινησιοθεραπείας.
+              {t("therapies.box3Outro")}
             </p>
           </div>
         </div>
@@ -283,7 +274,7 @@ export default function HomePage() {
         />
         <div className="absolute inset-0 bg-[rgba(8,33,33,0.5)]" />
         <div className="container mx-auto px-4 relative z-10">
-          <SectionTitle title="Τα Μηχανήματα" />
+          <SectionTitle title={t("machines.sectionTitle")} />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {machines.map((machine) => (
               <div key={machine.slug} className="flex items-stretch">
@@ -294,7 +285,7 @@ export default function HomePage() {
                       href={`/machines/${machine.slug}`}
                       className="text-white"
                     >
-                      {machine.title}
+                      {machine.title[locale]}
                     </Link>
                   </h4>
                   {machine.subtitle && (
@@ -306,7 +297,7 @@ export default function HomePage() {
                     href={`/machines/${machine.slug}`}
                     className="inline-block mt-4 px-4 py-2 text-black bg-white rounded-full transition-colors duration-300 hover:bg-oil hover:text-white"
                   >
-                    Περισσότερα
+                    {t("common.more")}
                   </Link>
                 </div>
               </div>
@@ -316,13 +307,13 @@ export default function HomePage() {
       </section>
 
       {/* Kinesiotherapy Section */}
-      <section id="kinisiotherapy" className="py-8 overflow-hidden text-white">
+      <section id="kinisiotherapy" className="py-8 overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div>
               <Image
                 src="/images/kinisiotherapy.webp"
-                alt="Κινησιοθεραπεία"
+                alt={t("kinesiotherapy.title")}
                 width={600}
                 height={400}
                 className="w-[90%] mx-auto"
@@ -330,20 +321,13 @@ export default function HomePage() {
             </div>
             <div>
               <h3 className="font-bold font-heading text-2xl mb-4">
-                Κινησιοθεραπεία
+                {t("kinesiotherapy.title")}
               </h3>
-              <p className="mb-4">
-                Στο <strong>Physiotherapon</strong>, πιστεύουμε πως η δυναμική
-                των σύγχρονων τεχνολογιών στη φυσικοθεραπεία λειτουργεί μόνο
-                όταν συνδυάζεται με την κινησιοθεραπεία.
-              </p>
-              <p>
-                Με το κατάλληλο πρόγραμμα και
-                ασκησιολόγιο — βασισμένο στις ανάγκες της πάθησής
-                σας — φτάνουμε μαζί, αποτελεσματικά, στον στόχο σας. Όλα υπό
-                την επίβλεψη των φυσικοθεραπευτών, στο ειδικά εξοπλισμένο
-                γυμναστήριο του Physiotherapon.
-              </p>
+              <p
+                className="mb-4"
+                dangerouslySetInnerHTML={{ __html: t("kinesiotherapy.p1.html") }}
+              />
+              <p dangerouslySetInnerHTML={{ __html: t("kinesiotherapy.p2.html") }} />
             </div>
           </div>
         </div>
@@ -352,21 +336,15 @@ export default function HomePage() {
       {/* Gallery Section */}
       <section id="gallery" className="py-15 overflow-hidden">
         <div className="container mx-auto px-4">
-          <SectionTitle title="Ο Χώρος Μας">
+          <SectionTitle title={t("gallery.title")}>
             <p className="mb-4">
-              Ανακαλύψτε τον μοντέρνο χώρο του
-              Physiotherapon — τέσσερις πλήρως εξοπλισμένες αίθουσες
-              φυσικοθεραπείας και ένα ευρύχωρο γυμναστήριο κινησιοθεραπείας.
+              {t("gallery.p1")}
             </p>
             <p className="mb-4">
-              Άπλετο φυσικό φως, φιλικό περιβάλλον, μίνιμαλ αισθητική και
-              επιλεγμένες μουσικές — το ιδανικό πεδίο τόσο για τους ασθενείς
-              όσο και για τους φυσικοθεραπευτές.
+              {t("gallery.p2")}
             </p>
             <p>
-              Κάθε επίσκεψη γίνεται με χαρά, και η φυσικοθεραπεία ασκείται
-              αποτελεσματικά — χάρη στην εξειδίκευση των φυσικοθεραπευτών και
-              τη συνεργασία με τον ίδιο τον ασθενή.
+              {t("gallery.p3")}
             </p>
           </SectionTitle>
         </div>
@@ -378,14 +356,14 @@ export default function HomePage() {
       {/* Doctors Section */}
       <section id="doctors" className="py-15 overflow-hidden">
         <div className="container mx-auto px-4">
-          <SectionTitle title="Οι Φυσικοθεραπευτές" />
+          <SectionTitle title={t("doctors.sectionTitle")} />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Terzanidis */}
             <div className="relative shadow-[0px_2px_15px_rgba(44,73,100,0.08)] p-8 text-center rounded-xl group">
               <div className="overflow-hidden block w-[140px] aspect-square mx-auto my-4 rounded-full">
                 <Image
                   src="/images/doctors/terzanidis_big.png"
-                  alt="ΣΤΑΥΡΟΣ ΤΕΡΖΑΝΙΔΗΣ"
+                  alt={t("doctors.terzanidis.name")}
                   width={140}
                   height={140}
                   className="transition-transform duration-300 group-hover:scale-110"
@@ -393,34 +371,31 @@ export default function HomePage() {
               </div>
               <div className="pl-8">
                 <h4 className="font-bold mb-1 text-xl text-white font-heading">
-                  ΣΤΑΥΡΟΣ ΤΕΡΖΑΝΙΔΗΣ
+                  {t("doctors.terzanidis.name")}
                 </h4>
                 <span className="block text-[15px] pb-2.5 relative font-medium text-white/60 after:content-[''] after:absolute after:block after:w-[50px] after:h-px after:bg-[#b2c8dd] after:bottom-0 after:left-0">
-                  Co-Owner Physiotherapon | Φυσικοθεραπευτής
+                  {t("doctors.terzanidis.role")}
                 </span>
                 <div className="mt-2.5 text-sm text-white text-start min-h-[180px]">
                   <p className="italic mb-2">
-                    ❝Το Physiotherapon είναι το επιστέγασμα 20 χρόνων εμπειρίας
-                    — μια φυσική εξέλιξη σε όλο αυτό που ονομάζουμε
-                    φυσικοθεραπεία.
+                    {t("doctors.terzanidis.quote1")}
                   </p>
-                  <p className="mb-2">
-                    Δημιουργήσαμε τις κατάλληλες συνθήκες ώστε να μπορούν
-                    <strong> όλοι</strong> ανεξαιρέτως να φορτίσουν ξανά το
-                    σώμα τους αποτελεσματικά:
-                  </p>
+                  <p
+                    className="mb-2"
+                    dangerouslySetInnerHTML={{ __html: t("doctors.terzanidis.quote2.html") }}
+                  />
                   <ul className="list-disc list-inside space-y-0.5 mb-2 text-white/80">
-                    <li>Αθλητές που χρειάζονται αποκατάσταση</li>
-                    <li>Ηλικιωμένοι που θέλουν να επανέλθουν μετά από ατύχημα</li>
-                    <li>Έφηβοι με μυοσκελετικές παθήσεις</li>
+                    <li>{t("doctors.terzanidis.list1")}</li>
+                    <li>{t("doctors.terzanidis.list2")}</li>
+                    <li>{t("doctors.terzanidis.list3")}</li>
                   </ul>
-                  <p className="italic">...και όχι μόνο!❞</p>
+                  <p className="italic">{t("doctors.terzanidis.quoteEnd")}</p>
                 </div>
                 <Link
                   href="/doctors/terzanidis"
                   className="inline-block mt-4 px-4 py-2 text-black bg-white rounded-full transition-colors duration-300 hover:bg-oil hover:text-white"
                 >
-                  Βιογραφικό
+                  {t("common.bio")}
                 </Link>
               </div>
             </div>
@@ -430,7 +405,7 @@ export default function HomePage() {
               <div className="overflow-hidden block w-[140px] aspect-square mx-auto my-4 rounded-full">
                 <Image
                   src="/images/doctors/papatheodorou_big.png"
-                  alt="ΕΥΑΓΓΕΛΟΣ ΠΑΠΑΘΕΟΔΩΡΟΥ"
+                  alt={t("doctors.papatheodorou.name")}
                   width={140}
                   height={140}
                   className="transition-transform duration-300 group-hover:scale-110"
@@ -438,33 +413,28 @@ export default function HomePage() {
               </div>
               <div className="pl-8">
                 <h4 className="font-bold mb-1 text-xl text-white font-heading">
-                  ΕΥΑΓΓΕΛΟΣ ΠΑΠΑΘΕΟΔΩΡΟΥ
+                  {t("doctors.papatheodorou.name")}
                 </h4>
                 <span className="block text-[15px] pb-2.5 relative font-medium text-white/60 after:content-[''] after:absolute after:block after:w-[50px] after:h-px after:bg-[#b2c8dd] after:bottom-0 after:left-0">
-                  Co-Owner Physiotherapon | β.Φυσικοθεραπευτής
+                  {t("doctors.papatheodorou.role")}
                 </span>
                 <div className="mt-2.5 text-sm text-white text-start min-h-[180px]">
                   <p className="italic mb-2">
-                    ❝Στο Physiotherapon συγκεντρώσαμε όλη την εμπειρία, τις
-                    γνώσεις και το πάθος μας για τη Φυσικοθεραπεία.
+                    {t("doctors.papatheodorou.quote1")}
                   </p>
                   <p className="mb-2">
-                    Φτιάξαμε από το μηδέν ένα υπερσύγχρονο φυσικοθεραπευτήριο
-                    στη Θεσσαλονίκη, με ουσιαστικό ενδιαφέρον για κάθε ασθενή
-                    ξεχωριστά.
+                    {t("doctors.papatheodorou.quote2")}
                   </p>
-                  <p className="mb-2">
-                    Στόχος μας: με το καταλληλότερο πρόγραμμα θεραπειών,
-                    αποκατάστασης &amp; κινησιοθεραπείας, κάθε ασθενής να
-                    επιστρέψει <strong>αποτελεσματικά &amp; δυναμικά</strong>{" "}
-                    στη δική του, μοναδική, καθημερινότητα!❞
-                  </p>
+                  <p
+                    className="mb-2"
+                    dangerouslySetInnerHTML={{ __html: t("doctors.papatheodorou.quote3.html") }}
+                  />
                 </div>
                 <Link
                   href="/doctors/papatheodorou"
                   className="inline-block mt-4 px-4 py-2 text-black bg-white rounded-full transition-colors duration-300 hover:bg-oil hover:text-white"
                 >
-                  Βιογραφικό
+                  {t("common.bio")}
                 </Link>
               </div>
             </div>
@@ -485,34 +455,30 @@ export default function HomePage() {
       </section>
 
       {/* Location Section */}
-      <section id="location" className="py-15 overflow-hidden text-white">
+      <section id="location" className="py-15 overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div>
               <h3 className="font-bold font-heading text-2xl mb-4">
-                Το Σημείο
+                {t("location.title")}
               </h3>
-              <p className="mb-4">
-                Το Physiotherapon είναι τo νέο, σύγχρονο φυσικοθεραπευτήριο στη
-                Θεσσαλονίκη. Στον πρώτο όροφο της{" "}
-                <strong>Παπάφη 125</strong>, με εύκολη πρόσβαση στην Κάτω
-                Τούμπα.
-              </p>
+              <p
+                className="mb-4"
+                dangerouslySetInnerHTML={{ __html: t("location.desc.html") }}
+              />
 
-              <p className="mb-2 font-semibold">Συγκοινωνία:</p>
+              <p className="mb-2 font-semibold">{t("location.transit")}</p>
               <ul className="list-disc list-inside mb-4 space-y-1 text-sm">
-                <li>ΟΑΣΘ 12 ΚΤΕΛ – ΚΑΤΩ ΤΟΥΜΠΑ → Στάση: ΚΛΕΑΝΘΟΥΣ</li>
-                <li>ΟΑΣΘ 11 Ν.Σ.ΣΤΑΘΜΟΣ ΠΥΛΑΙΑ → Στάση: ΟΤΕ</li>
+                <li>{t("location.bus1")}</li>
+                <li>{t("location.bus2")}</li>
               </ul>
               <p className="mb-4 text-sm">
-                Ευκολία προσωρινής στάθμευσης στη γύρω περιοχή.
+                {t("location.parking")}
               </p>
 
-              <p className="mb-2 font-semibold">Προσβασιμότητα:</p>
+              <p className="mb-2 font-semibold">{t("location.accessibility")}</p>
               <p className="text-sm">
-                Ράμπα εισόδου, μεγάλο ασανσέρ και ειδικά διαμορφωμένοι χώροι
-                — πλήρης προσβασιμότητα για όλους, συμπεριλαμβανομένων
-                ηλικιωμένων και ΑΜΕΑ.
+                {t("location.accessibilityDesc")}
               </p>
             </div>
             <div>
@@ -536,7 +502,7 @@ export default function HomePage() {
         />
         <div className="absolute inset-0 bg-[rgba(8,33,33,0.5)]" />
         <div className="container mx-auto px-4 relative z-10">
-          <SectionTitle title="Επικοινωνία" />
+          <SectionTitle title={t("nav.contact")} />
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-5">
             <div>
               <ContactInfo />

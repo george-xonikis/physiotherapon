@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
+import { I18nProvider } from "@/i18n/I18nContext";
 
 const openSans = Open_Sans({
   variable: "--font-open-sans",
@@ -62,10 +63,12 @@ export default function RootLayout({
       className={`${openSans.variable} ${raleway.variable} ${poppins.variable}`}
     >
       <body className="antialiased">
-        <Header />
-        {children}
-        <Footer />
-        <BackToTop />
+        <I18nProvider>
+          <Header />
+          {children}
+          <Footer />
+          <BackToTop />
+        </I18nProvider>
       </body>
     </html>
   );

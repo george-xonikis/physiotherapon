@@ -4,9 +4,11 @@ type HeroVariant = "home" | "terzanidis" | "papatheodorou" | "default";
 
 interface HeroSectionProps {
   variant?: HeroVariant;
+  firstName?: string;
+  lastName?: string;
 }
 
-export default function HeroSection({ variant = "home" }: HeroSectionProps) {
+export default function HeroSection({ variant = "home", firstName, lastName }: HeroSectionProps) {
   if (variant === "terzanidis") {
     return (
       <section
@@ -23,7 +25,7 @@ export default function HeroSection({ variant = "home" }: HeroSectionProps) {
         />
         <div className="absolute inset-0 bg-[rgba(4,19,12,0.29)]" />
         <h3 className="relative z-10 text-white text-[38px] font-bold leading-[56px] tracking-[0.3em] text-center font-heading">
-          ΣΤΑΥΡΟΣ <br /> ΤΕΡΖΑΝΙΔΗΣ
+          {firstName ?? "ΣΤΑΥΡΟΣ"} <br /> {lastName ?? "ΤΕΡΖΑΝΙΔΗΣ"}
         </h3>
       </section>
     );
@@ -45,7 +47,7 @@ export default function HeroSection({ variant = "home" }: HeroSectionProps) {
         />
         <div className="absolute inset-0 bg-[rgba(4,19,12,0.29)]" />
         <h3 className="relative z-10 text-white text-[38px] font-bold leading-[56px] tracking-[0.3em] text-center font-heading">
-          ΕΥΑΓΓΕΛΟΣ <br /> ΠΑΠΑΘΕΟΔΩΡΟΥ
+          {firstName ?? "ΕΥΑΓΓΕΛΟΣ"} <br /> {lastName ?? "ΠΑΠΑΘΕΟΔΩΡΟΥ"}
         </h3>
       </section>
     );

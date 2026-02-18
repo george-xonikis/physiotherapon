@@ -1,33 +1,29 @@
-import Link from "next/link";
+"use client";
 
-const machineLinks = [
-  { slug: "tecar", label: "Tecar" },
-  { slug: "electrotherapy", label: "Ηλεκτροθεραπεία" },
-  { slug: "pressotherapy", label: "Πρεσοθεραπεία" },
-  { slug: "diathermy", label: "Λάμπα Διαθερμίας" },
-  { slug: "ultrasound", label: "Υπέρηχος" },
-  { slug: "laser", label: "Laser" },
-  { slug: "aquilo", label: "Aquilo" },
-];
+import Link from "next/link";
+import { machines } from "@/data/machines";
+import { useI18n } from "@/i18n/I18nContext";
 
 interface MachinesSidebarProps {
   activeSlug: string;
 }
 
 export default function MachinesSidebar({ activeSlug }: MachinesSidebarProps) {
+  const { locale } = useI18n();
+
   return (
     <nav className="flex flex-col">
-      {machineLinks.map((link) => (
+      {machines.map((machine) => (
         <Link
-          key={link.slug}
-          href={`/machines/${link.slug}`}
+          key={machine.slug}
+          href={`/machines/${machine.slug}`}
           className={`block p-4 border-l-[5px] transition-all duration-300 ease-in-out ${
-            activeSlug === link.slug
+            activeSlug === machine.slug
               ? "bg-white text-oil border-oil"
               : "text-white border-white hover:text-black hover:bg-white"
           }`}
         >
-          {link.label}
+          {machine.title[locale]}
         </Link>
       ))}
     </nav>

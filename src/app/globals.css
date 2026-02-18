@@ -18,8 +18,10 @@
   --color-link: #1977cc;
   --color-link-hover: #3291e6;
 
-  /* Text */
-  --color-foreground: #444444;
+  /* Text — body bg is dark, so primary text is white */
+  --color-foreground: white;
+  --color-foreground-muted: #777777;
+  --color-foreground-inverse: #2c4964;
 
   /* Fonts — values injected by next/font/google in layout.tsx */
   --font-sans: var(--font-open-sans, system-ui, -apple-system, sans-serif);
@@ -50,6 +52,12 @@ input,
 textarea,
 select {
   font-family: inherit;
+}
+
+input,
+textarea,
+select {
+  color: var(--color-foreground-inverse);
 }
 
 button,

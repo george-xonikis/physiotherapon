@@ -1,17 +1,22 @@
+"use client";
+
 import Link from "next/link";
 import { ChevronRight, MapPin, Phone, Mail } from "lucide-react";
+import { useI18n } from "@/i18n/I18nContext";
 
-const footerLinks = [
-  { href: "/#hero", label: "Αρχική" },
-  { href: "/#about", label: "Σχετικά με εμάς" },
-  { href: "/#therapies", label: "Θεραπείες" },
-  { href: "/#services", label: "Μηχανήματα" },
-  { href: "/#contact", label: "Επικοινωνία" },
+const footerLinkKeys = [
+  { href: "/#hero", key: "nav.home" },
+  { href: "/#about", key: "footer.aboutUs" },
+  { href: "/#therapies", key: "nav.therapies" },
+  { href: "/#services", key: "nav.machines" },
+  { href: "/#contact", key: "nav.contact" },
 ];
 
 export default function Footer() {
+  const { t } = useI18n();
+
   return (
-    <footer className="text-white text-sm">
+    <footer className="text-sm">
       <div className="pt-15 pb-8 px-4 shadow-[0px_2px_15px_rgba(25,119,204,0.1)]">
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row justify-center gap-16 md:gap-24">
@@ -22,7 +27,7 @@ export default function Footer() {
 
               <ul className="space-y-4">
                 <li className="flex items-start gap-3 justify-end">
-                  <span>ΠΑΠΑΦΗ 125, 1ος Όροφος, Θεσσαλονίκη</span>
+                  <span>{t("footer.address")}</span>
                   <MapPin size={18} className="text-oil shrink-0 mt-0.5" />
                 </li>
                 <li className="flex items-center gap-3 justify-end">
@@ -47,9 +52,9 @@ export default function Footer() {
             </div>
 
             <div className="mb-8 text-left">
-              <h4 className="text-base font-bold pb-3">Χρήσιμοι Σύνδεσμοι</h4>
+              <h4 className="text-base font-bold pb-3">{t("footer.usefulLinks")}</h4>
               <ul className="list-none p-0 m-0">
-                {footerLinks.map((link) => (
+                {footerLinkKeys.map((link) => (
                   <li
                     key={link.href}
                     className="py-2.5 first:pt-0 flex items-center"
@@ -57,9 +62,9 @@ export default function Footer() {
                     <ChevronRight size={18} className="text-oil mr-1" />
                     <Link
                       href={link.href}
-                      className="text-[#777] transition-colors duration-300 hover:text-oil"
+                      className="text-foreground-muted transition-colors duration-300 hover:text-oil"
                     >
-                      {link.label}
+                      {t(link.key)}
                     </Link>
                   </li>
                 ))}

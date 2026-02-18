@@ -2,12 +2,14 @@
 
 import { useState, type FormEvent } from "react";
 import { Loader2 } from "lucide-react";
+import { useI18n } from "@/i18n/I18nContext";
 
 type Status = "idle" | "loading" | "success" | "error";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const { t } = useI18n();
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -34,11 +36,11 @@ export default function ContactForm() {
         form.reset();
       } else {
         const json = await res.json();
-        setErrorMsg(json.error || "Something went wrong.");
+        setErrorMsg(json.error || t("form.genericError"));
         setStatus("error");
       }
     } catch {
-      setErrorMsg("Network error. Please try again.");
+      setErrorMsg(t("form.networkError"));
       setStatus("error");
     }
   }
@@ -49,35 +51,35 @@ export default function ContactForm() {
         <input
           type="text"
           name="name"
-          placeholder="Your Name"
+          placeholder={t("form.yourName")}
           required
           maxLength={100}
-          className="h-11 px-3 text-sm border border-gray-300 focus:border-[#1977cc] focus:outline-none w-full"
+          className="h-11 px-3 text-sm border border-gray-300 focus:border-[#1977cc] focus:outline-none w-full placeholder:text-white"
         />
         <input
           type="email"
           name="email"
-          placeholder="Your Email"
+          placeholder={t("form.yourEmail")}
           required
           maxLength={100}
-          className="h-11 px-3 text-sm border border-gray-300 focus:border-[#1977cc] focus:outline-none w-full"
+          className="h-11 px-3 text-sm border border-gray-300 focus:border-[#1977cc] focus:outline-none w-full placeholder:text-white"
         />
       </div>
       <input
         type="text"
         name="subject"
-        placeholder="Subject"
+        placeholder={t("form.subject")}
         required
         maxLength={200}
-        className="mt-4 h-11 px-3 text-sm border border-gray-300 focus:border-[#1977cc] focus:outline-none w-full"
+        className="mt-4 h-11 px-3 text-sm border border-gray-300 focus:border-[#1977cc] focus:outline-none w-full placeholder:text-white"
       />
       <textarea
         name="message"
         rows={5}
-        placeholder="Message"
+        placeholder={t("form.message")}
         required
         maxLength={5000}
-        className="mt-4 px-3 py-2.5 text-sm border border-gray-300 focus:border-[#1977cc] focus:outline-none w-full"
+        className="mt-4 px-3 py-2.5 text-sm border border-gray-300 focus:border-[#1977cc] focus:outline-none w-full placeholder:text-white"
       />
 
       <div className="my-3">
@@ -88,7 +90,7 @@ export default function ContactForm() {
         )}
         {status === "success" && (
           <div className="bg-[#18d26e] text-white text-center p-4 font-semibold">
-            Your message has been sent. Thank you!
+            {t("form.successMessage")}
           </div>
         )}
       </div>
@@ -99,7 +101,7 @@ export default function ContactForm() {
           disabled={status === "loading"}
           className="bg-oil text-white border-0 px-9 py-2.5 rounded-full transition-colors duration-400 hover:bg-oil-hover disabled:opacity-70 inline-flex items-center gap-2"
         >
-          Send Message
+          {t("form.sendMessage")}
           {status === "loading" && <Loader2 size={18} className="animate-spin" />}
         </button>
       </div>
