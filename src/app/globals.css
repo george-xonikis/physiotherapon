@@ -1,26 +1,108 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+ * Theme System for Tailwind v4
+ *
+ * All design tokens live here. Components use Tailwind classes
+ * that reference these tokens (e.g. bg-green-main, text-oil, font-heading).
+ */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Brand colors */
+  --color-green-main: #052023;
+  --color-gray-main: #757E7E;
+  --color-oil: #A89651;
+  --color-oil-hover: #bda95e;
+
+  /* Link colors */
+  --color-link: #1977cc;
+  --color-link-hover: #3291e6;
+
+  /* Text */
+  --color-foreground: #444444;
+
+  /* Fonts — values injected by next/font/google in layout.tsx */
+  --font-sans: var(--font-open-sans, system-ui, -apple-system, sans-serif);
+  --font-heading: var(--font-raleway, system-ui, sans-serif);
+  --font-display: var(--font-poppins, system-ui, sans-serif);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Base ──────────────────────────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 110px;
 }
 
+/* ── Font configuration ───────────────────────────────────────── */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+button,
+[type="button"],
+[type="submit"],
+[type="reset"] {
+  cursor: pointer;
+}
+
+/* ── Links (in base layer so Tailwind utilities can override) ── */
+
+/* ── Custom scrollbar ─────────────────────────────────────────── */
+
+body::-webkit-scrollbar {
+  width: 12px;
+  border-radius: 2em;
+  background-color: rgba(255, 255, 255, 0.93);
+}
+
+body::-webkit-scrollbar-track {
+  border-radius: 2em;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: rgba(255, 255, 255, 0.93);
+}
+
+body::-webkit-scrollbar-thumb {
+  border-radius: 2em;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+  background-color: var(--color-green-main);
+}
+
+/* Firefox scrollbar */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-green-main) rgba(255, 255, 255, 0.93);
+}
+
+/* ── Base layer ───────────────────────────────────────────────── */
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-foreground);
+    background-color: var(--color-green-main);
+  }
+
+  a {
+    color: var(--color-link);
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--color-link-hover);
+    text-decoration: none;
+  }
 }
